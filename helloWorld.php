@@ -15,13 +15,29 @@
 
 add_shortcode('profile_search','display_hello_world_page');
 function display_hello_world_page() {
-    echo 'Profile Search...';
+    echo 'Profile Search... ...';
     get_search_form();
     get_users();
     $blogusers = get_users( 'role=subscriber' );
     // Array of stdClass objects.
     foreach ( $blogusers as $user ) {
       echo '<span>' . esc_html( $user->Name ) . '</span>';
+    }
+
+    $users = get_users( );
+    echo "<br>users size: " . count($users);
+    foreach($users as $user){
+        echo "<br>user id: " . $user->id;
+        echo "<br>user name: " . $user->user_login;
+        echo "<br>user first name: " . $user->user_firstname;
+        echo "<br>user last name: " . $user->user_lastname;
+        echo "<br>user display name: " . $user->display_name;
+        echo "<br>user email: " . $user->user_email;
+        echo "<br>user metier: " . $user->metier;
+        echo "<br> user meta: ";
+        // $all_meta_for_user = get_user_meta( $user->id );
+        // print_r( $all_meta_for_user );
+        echo "<br>";
     }
 }
 function hello_world_admin_menu() {
