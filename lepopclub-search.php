@@ -1,6 +1,6 @@
 <?php
 /**
- * Hello World
+ * Lepopclub Search Engine
  *
  * @package     ProfileSearch
  * @author      Sana REZAEI
@@ -8,22 +8,23 @@
  * @wordpress-plugin
  * Plugin Name: Profile Search for lepopclub
  * Description: This plugin prints "Hello World" inside an admin page.
- * Text Domain: helloWorld
+ * Text Domain: index
  * License:     GPL v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
+include "search-profiles.php";
 
-add_shortcode('profile_search','hello');
-function hello() {
+add_shortcode('profile_search','search_profile_main');
+function search_profile_main() {
   html_form_code();
   if ($_POST){
     try{
         $name = $_POST['cf-name'];
         $metier= $_POST['cf-metier'];
+        search_profiles($name, $metier);
         // $sql = "UPDATE List SET name = '{$_POST['name']}', color = '{$_POST['color']}' WHERE id={$_GET['id']}";
         // $db->query($sql);
         // header('Location: index.php');
-        echo "received a search query with username: " . $name . " and metier: " . $metier;
     }
     catch(Exception $e) {
         echo 'Caught exception: ',  $e->getMessage(), "\n";
@@ -33,11 +34,11 @@ function hello() {
 
 function profile_search_admin_menu() {
   add_menu_page(
-        'Hello World',// page title
-        'Hello World',// menu title
+        'Custom Profile Search',// page title
+        'Profile Search',// menu title
         'manage_options',// capability
-        'hello-world',// menu slug
-        'hello' // callback function
+        'profile-search',// menu slug
+        'search_profile_main' // callback function
     );
 }
 add_action('admin_menu', 'profile_search_admin_menu');

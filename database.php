@@ -1,7 +1,7 @@
 <?php
 
 class Database {
-    private static $dbName = 'ToDoApp';
+    private static $dbName = 'testDB';
     private static $dbHost = 'localhost';
     private static $port = '8889';
     private static $dbUsername = 'root';
