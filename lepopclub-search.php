@@ -17,14 +17,16 @@ include "search-profiles.php";
 add_shortcode('profile_search','search_profile_main');
 function search_profile_main() {
   html_form_code();
+  // echo "<br>" . do_shortcode( '[youzify_account_avatar]' );
+  // echo "<br>" . do_shortcode( '[youzify_author_box user_id="1"]');
+  // echo "<br>" . do_shortcode( '[ultimatemember_searchform]');
+  // echo "<br>" . do_shortcode( '[ultimatemember_online max="11" roles="all"]');
+  // echo "<br>" . do_shortcode( '[um_loggedin] This text can only be seen by logged in users [/um_loggedin]');
   if ($_POST){
     try{
         $name = $_POST['cf-name'];
         $metier= $_POST['cf-metier'];
         search_profiles($name, $metier);
-        // $sql = "UPDATE List SET name = '{$_POST['name']}', color = '{$_POST['color']}' WHERE id={$_GET['id']}";
-        // $db->query($sql);
-        // header('Location: index.php');
     }
     catch(Exception $e) {
         echo 'Caught exception: ',  $e->getMessage(), "\n";
@@ -56,5 +58,6 @@ function html_form_code() {
   echo '<p><input type="submit" name="cf-submitted" value="Search users"/></p>';
   echo '</form>';
 }
+
 ?>
 
