@@ -1,5 +1,4 @@
 <?php
-require( plugin_dir_path( __FILE__ ) . 'database.php');
 
 function displayUser($id) {
     $db = new Database();

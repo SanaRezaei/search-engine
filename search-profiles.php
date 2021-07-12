@@ -3,7 +3,7 @@ require( plugin_dir_path( __FILE__ ) . 'database.php');
 require( plugin_dir_path( __FILE__ ) . 'display-result.php');
 
 function search_profiles($name, $metier) { 
-    $db = new  Database();
+    $db = new Database();
     $cid = get_current_user_id();
     echo "<br>current user id: " . $cid;
 

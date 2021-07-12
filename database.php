@@ -14,20 +14,20 @@ class Database {
     }
 
     public  function connect(){
-        if ( null == self::$cont ){
+        if ( null == $this->cont ){
             try {
-                $arg = "mysql:host=" . self::$dbHost . ";dbname=" . self::$dbName . ";port=" . self::$port;
-                self::$cont = new PDO (
-                    $arg, self::$dbUsername, self::$dbUserPassword);
+                $arg = "mysql:host=" . $this->dbHost . ";dbname=" . $this->dbName . ";port=" . $this->port;
+                $this->cont = new PDO (
+                    $arg, $this->dbUsername, $this->dbUserPassword);
 
             }catch (PDOException $e) {
                 die ($e -> getMessage());
             }
         }
-        return self::$cont;
+        return $this->cont;
     }
     public  function disconnect (){
-        self::$cont = null ;
+        $this->cont = null ;
     }
 
     public  function getCurrentUser() {
