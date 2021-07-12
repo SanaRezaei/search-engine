@@ -26,15 +26,30 @@ class Database {
         }
         return $this->cont;
     }
-    public  function disconnect (){
+    public function disconnect (){
         $this->cont = null ;
     }
 
-    public  function getCurrentUser() {
+    public function getCurrentUser() {
         $sql = "SELECT * FROM wp_users where ID=?"; 
         $result = $this->db->prepare($sql); 
         $result->execute([get_current_user_id()]); 
         return $result->fetch(); 
+    }
+    /**
+     * @param sql: sql string query
+     * @param params: array of query parameters filling ? marks in sql query
+     */
+    public function query($sql, array $params){
+        echo "<br> query: " . $sql;
+        echo "<br> params0: " . $params[0];
+        echo "<br> params1: " . $params[1];
+        $result = $this->db->prepare($sql); 
+        echo "<br> loglog";
+        $ret =  $result->execute($params); 
+        $ret = $ret->fetch();
+        echo "<br> loglog2";
+        return $ret;
     }
 }
 
