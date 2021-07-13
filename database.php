@@ -41,15 +41,14 @@ class Database {
      * @param params: array of query parameters filling ? marks in sql query
      */
     public function query($sql, array $params){
-        echo "<br> query: " . $sql;
-        echo "<br> params0: " . $params[0];
-        echo "<br> params1: " . $params[1];
-        $result = $this->db->prepare($sql); 
-        echo "<br> loglog";
-        $ret =  $result->execute($params); 
-        $ret = $ret->fetch();
-        echo "<br> loglog2";
-        return $ret;
+        // $sql = "SELECT user_id,value FROM wp_bp_xprofile_data where value=? AND user_id=?";
+        $params = ['Web developer', '1'];
+        $q = $this->db->prepare($sql);
+        $q->execute($params); 
+        echo "<br> log1";
+        $data = $q->fetchAll();
+        echo "<br> log2";
+        return $data;
     }
 }
 
