@@ -18,10 +18,6 @@ add_shortcode('profile_search','search_profile_main');
 function search_profile_main() {
   html_form_code();
   // echo "<br>" . do_shortcode( '[youzify_account_avatar]' );
-  // echo "<br>" . do_shortcode( '[youzify_author_box user_id="1"]');
-  // echo "<br>" . do_shortcode( '[ultimatemember_searchform]');
-  // echo "<br>" . do_shortcode( '[ultimatemember_online max="11" roles="all"]');
-  // echo "<br>" . do_shortcode( '[um_loggedin] This text can only be seen by logged in users [/um_loggedin]');
   if ($_POST){
     try{
         $name = $_POST['cf-name'];

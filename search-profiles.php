@@ -14,13 +14,10 @@ function search_profiles($name, $metier) {
         }
     }
     foreach($nameAndId as $id => $name) {
-      // echo "<br> searching metier for name: " . $name . ' and id: ' . $id;
       $sql = "SELECT user_id,value FROM wp_bp_xprofile_data where value=? AND user_id=?"; 
       $result = $db->query($sql, [$metier,$id]);
       foreach($result as $resultItem) {
-        echo "curr user id: " . $resultItem['user_id'];
         if (!empty($nameAndId[$resultItem['user_id']])) {
-          echo "<br> display user";
           displayUser($id); 
         }   
       }
