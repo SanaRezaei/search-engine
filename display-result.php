@@ -1,12 +1,18 @@
 <?php
 
 function displayUser($id) {
+    echo "<br> dis log1";
     $db = new Database();
+    echo "<br> dis log2";
     $user = $db->getCurrentUser();
-    echo "<b> user name: " . $user['user_name'];
+    echo "<b> current user name: " . $user['user_login'];
+    $targetUser = $db->getUserById($id);
+    $targetUserId = $targetUser[0]['user_login'];
+    echo "<br> user login: " . $targetUserId;
     
 
-    $url = 'https://www.lepopclub.fr/membres-3/sana/messages/compose/?r=kamil';
+    $url = 'https://www.lepopclub.fr/membres-3/' . $user[0][1] . '/messages/compose/?r=' . $targetUserId;
+    echo "<br> url: " . $url;
     echo '<div class="card" style="border: 5px solid gray; width:220px";>';
     echo '<div class="card-body">';
     echo '<div class="d-flex flex-column align-items-center text-center">';
@@ -17,7 +23,7 @@ function displayUser($id) {
     echo '<p class="text-secondary mb-1" style="text-align: center;">@johnny</p>';
     echo '<button class="GFG" style="  margin: auto;';
     echo 'display: block;"';
-    echo 'onclick="window.open(\'http://www.google.com\', \'_blank\');">';
+    echo 'onclick="window.open(\'' . $url . '\',\'_blank\');">';
     echo 'Message';
     echo '</button>';
     echo '</div>';
