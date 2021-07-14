@@ -56,6 +56,11 @@ class Database {
         $data = $q->fetchAll();
         return $data;
     }
+
+    public function getMetierByUserId($id){
+        $sql = "SELECT value FROM wp_bp_xprofile_data where user_id=?"; 
+        return $this->query($sql, [$id]);
+    }
 }
 
 ?>

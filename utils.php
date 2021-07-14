@@ -14,4 +14,11 @@ abstract class SearchStrategy
     // etc.
 }
 
+$METIERS = array(
+    "etudiant" => "Etudiant",
+    "web-dev" => "Développeur web",
+    "back-dev" => "Développeur back-end",
+    "autre" => "Autre",
+);
+
 ?>

@@ -17,11 +17,12 @@ include "search-profiles.php";
 add_shortcode('profile_search','search_profile_main');
 function search_profile_main() {
   html_form_code();
+  global $METIERS;
   // echo "<br>" . do_shortcode( '[youzify_account_avatar]' );
   if ($_POST){
     try{
         $name = $_POST['cf-name'];
-        $metier= $_POST['cf-metier'];
+        $metier= $METIERS[$_POST['cf-metier']];
         search_profiles($name, $metier);
     }
     catch(Exception $e) {
@@ -42,15 +43,24 @@ function profile_search_admin_menu() {
 add_action('admin_menu', 'profile_search_admin_menu');
 
 function html_form_code() {
+  global $METIERS;
+
   echo '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';
   echo '<p>';
+  // user name label and field
   echo 'User name<br />';
   echo '<input type="text" name="cf-name" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf-name"] ) ? esc_attr( $_POST["cf-name"] ) : '' ) . '" size="40" />';
   echo '</p>';
   echo '<p>';
   echo 'Metier<br />';
-  echo '<input type="text" name="cf-metier" value="' . ( isset( $_POST["cf-metier"] ) ? esc_attr( $_POST["cf-metier"] ) : '' ) . '" size="40" />';
+  // dropdown list of metiers
+  echo '<select id="cf-metier" name="cf-metier">';
+  foreach($METIERS as $key => $value){
+    echo '<option value=' . $key . '>' . $value . '</option>';
+  }
+  echo '</select>';
   echo '</p>';
+  // submit button
   echo '<p><input type="submit" name="cf-submitted" value="Search users"/></p>';
   echo '</form>';
 }
