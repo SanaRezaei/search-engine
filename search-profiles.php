@@ -36,13 +36,12 @@ function search_profiles($name, $metier, $strategy = null) {
       }
     }
 
-    $nameOrMetier = array_unique(array_merge(array_keys($nameResult), array_keys($metierResult)));
-    $nameAndMetier = array_intersect(array_keys($nameResult), array_keys($metierResult));
-
     if ($strategy == SearchStrategy::And){
+      $nameAndMetier = array_intersect(array_keys($nameResult), array_keys($metierResult));
       displayUsers($nameAndMetier);
     }
     else if ($strategy == SearchStrategy::Or){
+      $nameOrMetier = array_unique(array_merge(array_keys($nameResult), array_keys($metierResult)));
       displayUsers($nameOrMetier);
     }
 }
