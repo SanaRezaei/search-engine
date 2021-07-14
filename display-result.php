@@ -12,13 +12,13 @@ function displayUser($id) {
     $targetUser = $db->getUserById($id);
     $targetUserId = $targetUser[0]['user_login'];
     $metier = $db->getMetierByUserId($id);
-
+    $avatarUrl = get_avatar_url($targetUserId);
 
     $url = 'https://www.lepopclub.fr/membres-3/' . $user[0][1] . '/messages/compose/?r=' . $targetUserId;
     echo '<div class="card" style="border: 5px solid gray; width:220px";>';
     echo '<div class="card-body">';
     echo '<div class="d-flex flex-column align-items-center text-center">';
-    echo '<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="rounded-circle" width="150" style="  margin: auto;';
+    echo '<img src="' . $avatarUrl . '" alt="" class="rounded-circle" width="150" style="  margin: auto;';
     echo 'display: block;">';
     echo '<div class="mt-3">';
     echo '<h4 style="text-align: center;">' . $user['display_name'] .  '</h4>';
