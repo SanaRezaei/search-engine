@@ -15,7 +15,7 @@ function displayUser($id) {
     echo 'display: block;">';
     echo '<div class="mt-3">';
     echo '<h4 style="text-align: center;">' . $user['display_name'] .  '</h4>';
-    echo '<p class="text-secondary mb-1" style="text-align: center;">@johnny</p>';
+    echo '<p class="text-secondary mb-1" style="text-align: center;">@' . $targetUserId . '</p>';
     echo '<button class="GFG" style="  margin: auto;';
     echo 'display: block;"';
     echo 'onclick="window.open(\'' . $url . '\',\'_blank\');">';
