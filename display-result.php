@@ -1,5 +1,11 @@
 <?php
 
+function displayUsers($ids){
+    foreach($ids as $id) {
+        displayUser($id); 
+    }
+}
+
 function displayUser($id) {
     $db = new Database();
     $user = $db->getCurrentUser();

@@ -31,13 +31,9 @@ class Database {
     }
 
     public function getCurrentUser() {
-        
         $id = get_current_user_id();
         $sql = "SELECT * FROM wp_users where ID=?"; 
         return $this->query($sql, [$id]);
-        // $result = $this->db->prepare($sql); 
-        // $result->execute([get_current_user_id()]); 
-        // return $result->fetch(); 
     }
 
     public function getUserById($id) {

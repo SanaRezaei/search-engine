@@ -1,26 +1,38 @@
 <?php 
 require( plugin_dir_path( __FILE__ ) . 'database.php');
 require( plugin_dir_path( __FILE__ ) . 'display-result.php');
+require( plugin_dir_path( __FILE__ ) . 'utils.php');
 
-function search_profiles($name, $metier) { 
+function search_profiles($name, $metier, $strategy = null) { 
+    if ($strategy == null){
+      $strategy = SearchStrategy::Or;
+    }
+
     $db = new Database();
-    $cid = get_current_user_id();
-
     $users = get_users();
-    $nameAndId = array();
+    $nameResult = array();
     foreach($users as $user){
-        if ($user->user_firstname == $name ){
-          $nameAndId[$user->id] = $user->user_firstname;
+        if (strtolower($user->user_firstname) == strtolower($name) ){
+          $nameResult[$user->id] = strtolower($user->user_firstname);
         }
     }
-    foreach($nameAndId as $id => $name) {
-      $sql = "SELECT user_id,value FROM wp_bp_xprofile_data where value=? AND user_id=?"; 
-      $result = $db->query($sql, [$metier,$id]);
-      foreach($result as $resultItem) {
-        if (!empty($nameAndId[$resultItem['user_id']])) {
-          displayUser($id); 
-        }   
-      }
+  
+    // get metier result
+    $sql = "SELECT user_id,value FROM wp_bp_xprofile_data where lower(value)=?"; 
+    $rows = $db->query($sql, [strtolower($metier)]);
+    $metierResult = array();
+    foreach($rows as $row){
+      $metierResult[$row['user_id']]=strtolower($row['value']);
+    }
+
+    $nameOrMetier = array_unique(array_merge(array_keys($nameResult), array_keys($metierResult)));
+    $nameAndMetier = array_intersect(array_keys($nameResult), array_keys($metierResult));
+
+    if ($strategy == SearchStrategy::And){
+      displayUsers($nameAndMetier);
+    }
+    else if ($strategy == SearchStrategy::Or){
+      displayUsers($nameOrMetier);
     }
 }
 
