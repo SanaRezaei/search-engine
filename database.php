@@ -1,4 +1,5 @@
 <?php
+include_once('./utils.php');
 
 class Database {
     private  $dbName = 'testDB';
@@ -58,8 +59,17 @@ class Database {
     }
 
     public function getMetierByUserId($id){
+        global $METIERS;
+        $metier = "";
         $sql = "SELECT value FROM wp_bp_xprofile_data where user_id=?"; 
-        return $this->query($sql, [$id]);
+        $results = $this->query($sql, [$id]);
+        foreach($results as $result){
+            if (isset($result['value']) && array_search($result['value'], $METIERS)){
+                $metier = $result['value'];
+                break;
+            }
+        }
+        return $metier;
     }
 }
 
