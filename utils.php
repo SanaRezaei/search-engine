@@ -1,5 +1,8 @@
 
 <?php
+
+$SIMILARITY_THRESHOLD = 60;
+
 // print an array
 function printArray($arr, $name) {
   echo "<br><strong> array " . $name . ": </strong>";

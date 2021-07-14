@@ -11,18 +11,29 @@ function search_profiles($name, $metier, $strategy = null) {
     $db = new Database();
     $users = get_users();
     $nameResult = array();
+    global $SIMILARITY_THRESHOLD;
     foreach($users as $user){
-        if (strtolower($user->user_firstname) == strtolower($name) ){
+      similar_text(
+        strtolower($name),
+        strtolower($user->user_firstname), $scoreName);
+        // echo "<br> user score for  " . $name . " and " . $user->user_firstname. " is: " . $score;
+        if ($scoreName > $SIMILARITY_THRESHOLD ){
           $nameResult[$user->id] = strtolower($user->user_firstname);
         }
     }
   
     // get metier result
-    $sql = "SELECT user_id,value FROM wp_bp_xprofile_data where lower(value)=?"; 
+    $sql = "SELECT user_id,value FROM wp_bp_xprofile_data"; 
     $rows = $db->query($sql, [strtolower($metier)]);
     $metierResult = array();
     foreach($rows as $row){
-      $metierResult[$row['user_id']]=strtolower($row['value']);
+      similar_text(
+        strtolower($metier),
+        strtolower($row['value']), $scoreMetier);
+      // echo "<br> metier score for  " . $metier . " and " . $row['value'] . " is: " . $score;
+      if ($scoreMetier > $SIMILARITY_THRESHOLD ){
+        $metierResult[$row['user_id']]=strtolower($row['value']);
+      }
     }
 
     $nameOrMetier = array_unique(array_merge(array_keys($nameResult), array_keys($metierResult)));
