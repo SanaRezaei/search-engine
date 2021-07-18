@@ -49,16 +49,21 @@ function html_form_code() {
   echo '<p>';
   // user name label and field
   echo 'First name<br />';
-  echo '<input type="text" name="cf-name" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf-name"] ) ? esc_attr( $_POST["cf-name"] ) : '' ) . '" size="40" />';
+  echo '<input type="text" name="cf-name" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf-name"] ) ? esc_attr( $_POST["cf-name"] ) : '' ) . '" size="20" />';
   echo '</p>';
   echo '<p>';
   // user last name label and field
   echo 'Last name<br />';
-  echo '<input type="text" name="cf-lastName" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf-lastName"] ) ? esc_attr( $_POST["cf-lastName"] ) : '' ) . '" size="40" />';
+  echo '<input type="text" name="cf-lastName" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf-lastName"] ) ? esc_attr( $_POST["cf-lastName"] ) : '' ) . '" size="20" />';
+  echo '</p>';
+  // user email label and field
+  echo '<p>';
+  echo 'Email<br />';
+  echo '<input type="text" name="cf-email" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf-email"] ) ? esc_attr( $_POST["cf-email"] ) : '' ) . '" size="30" />';
   echo '</p>';
   echo '<p>';
-  echo 'Metier<br />';
   // dropdown list of metiers
+  echo 'Metier<br />';
   echo '<select id="cf-metier" name="cf-metier">';
   foreach($METIERS as $key => $value){
     echo '<option value=' . $key . '>' . $value . '</option>';
