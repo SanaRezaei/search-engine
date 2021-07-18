@@ -27,7 +27,7 @@ function search_profile_main() {
       "user_email" => $_POST['cf_user_email'],
       "user_login" => $_POST['cf_user_login'],
       "display_name" => $_POST['cf_display_name'],
-      "telephone_number" => $_POST['cf_telephone_number'],
+      "telephone" => $_POST['cf_telephone'],
     );
     try{
         search_profiles($data);
@@ -71,7 +71,7 @@ function html_form_code() {
   // user email label and field
   echo '<p>';
   echo 'Email<br />';
-  echo '<input type="text" name="cf_user_email" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf_user_email"] ) ? esc_attr( $_POST["cf_user_email"] ) : '' ) . '" size="30" />';
+  echo '<input type="email" name="cf_user_email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" value="' . ( isset( $_POST["cf_user_email"] ) ? esc_attr( $_POST["cf_user_email"] ) : '' ) . '" size="30" />';
   echo '</p>';
   // user telephone number label and field
   echo '<p>';

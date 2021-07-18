@@ -8,26 +8,22 @@ require( plugin_dir_path( __FILE__ ) . 'utils.php');
  * @param array $data input associative array contating fieldName->fieldValue
  */
 function search_profiles($data, $strategy = null) { 
-    printArray($data);
     if (empty($data)){
-      echo "<br>data empty";
       return;
     }
-
-    global $fields;
+    global $search_fields;
+    
     global $fieldTypeMap;
     $results = array();
-    foreach($fields as $field){
-      echo "<br> field: " . $field;
+    foreach($search_fields as $field){
       if (!empty($data[$field])){
-        echo "<br>    checking " . $field . " with value " . $data[$field];
         if ($fieldTypeMap[$field] == FieldTypes::STANDARD){
           $res = searchStandardField($field, $data[$field]);
         }
         else {
           $res = searchCostumField($field, $data[$field]);
         }
-        $results= array_unique(array_merge(array_keys($results), array_keys($res)));
+        $results= array_unique(array_merge(array_values($results), array_values($res)));
       }
     }
     displayUsers($results);
@@ -57,9 +53,7 @@ function searchCostumField($field_name, $field_value){
   $db = new Database();
   $sql = "SELECT user_id,value FROM wp_bp_xprofile_data where field_id=?"; 
   global $costumFieldsId;
-  echo "<br> costum field id: " . $costumFieldsId[$field_name];
   $rows = $db->query($sql, [$costumFieldsId[$field_name]]);
-  // array of matched user IDs
   $result = array();
 
   foreach($rows as $row){
@@ -76,7 +70,6 @@ function searchCostumField($field_name, $field_value){
  */
 function isMatch($field_name, $value1, $value2){
   global $thresholdMap;
-  echo "<br> matching " . $field_name . " " . $value1 . " " . $value2;
   if ($thresholdMap[$field_name] < 100){
     similar_text(
       strtolower($value1),

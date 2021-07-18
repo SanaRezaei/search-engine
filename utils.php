@@ -54,7 +54,7 @@ $METIERS = array(
 );
 
 // list of fields in search form
-$fields = array(
+$search_fields = array(
   "first_name",
   "last_name",
   "metier",
