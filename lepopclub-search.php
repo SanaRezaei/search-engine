@@ -48,8 +48,13 @@ function html_form_code() {
   echo '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';
   echo '<p>';
   // user name label and field
-  echo 'User name<br />';
+  echo 'First name<br />';
   echo '<input type="text" name="cf-name" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf-name"] ) ? esc_attr( $_POST["cf-name"] ) : '' ) . '" size="40" />';
+  echo '</p>';
+  echo '<p>';
+  // user last name label and field
+  echo 'Last name<br />';
+  echo '<input type="text" name="cf-lastName" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf-lastName"] ) ? esc_attr( $_POST["cf-lastName"] ) : '' ) . '" size="40" />';
   echo '</p>';
   echo '<p>';
   echo 'Metier<br />';

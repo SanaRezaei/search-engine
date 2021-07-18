@@ -15,6 +15,7 @@ function displayUser($id) {
     $avatarUrl = get_avatar_url($targetUserId);
 
     $url = 'https://www.lepopclub.fr/membres-3/' . $user[0][1] . '/messages/compose/?r=' . $targetUserId;
+    echo '<br>';
     echo '<div class="card" style="border: 5px solid gray; width:220px";>';
     echo '<div class="card-body">';
     echo '<div class="d-flex flex-column align-items-center text-center">';

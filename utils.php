@@ -2,9 +2,19 @@
 <?php
 
 $SIMILARITY_THRESHOLD = 60;
+$thresholdMap = array(
+  "user_login" => 100,
+  "user_pass" => 100,
+  "user_email" => 100,
+  "user_registered" => 100,
+  "display_name" => 70,
+  "first_name" => 70,
+  "last_name" => 70,
+  "metier" => 70,
+);
 
 // print an array
-function printArray($arr, $name) {
+function printArray($arr, $name='') {
   echo "<br><strong> array " . $name . ": </strong>";
   foreach( $arr as $key => $value ){
     echo "<br>" . $key."\t=>\t".$value;
