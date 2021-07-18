@@ -20,10 +20,17 @@ function search_profile_main() {
   global $METIERS;
   // echo "<br>" . do_shortcode( '[youzify_account_avatar]' );
   if ($_POST){
+    $data = array(
+      "first_name" => $_POST['cf_name'],
+      "last_name" => $_POST['cf_last_name'],
+      "metier" => $_POST['cf_metier'],
+      "user_email" => $_POST['cf_user_email'],
+      "user_login" => $_POST['cf_user_login'],
+      "display_name" => $_POST['cf_display_name'],
+      "telephone_number" => $_POST['cf_telephone_number'],
+    );
     try{
-        $name = $_POST['cf-name'];
-        $metier= $METIERS[$_POST['cf-metier']];
-        search_profiles($name, $metier);
+        search_profiles($data);
     }
     catch(Exception $e) {
         echo 'Caught exception: ',  $e->getMessage(), "\n";
@@ -46,32 +53,48 @@ function html_form_code() {
   global $METIERS;
 
   echo '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';
+  // user first name label and field
   echo '<p>';
-  // user name label and field
   echo 'First name<br />';
-  echo '<input type="text" name="cf-name" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf-name"] ) ? esc_attr( $_POST["cf-name"] ) : '' ) . '" size="20" />';
+  echo '<input type="text" name="cf_first_name" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf_first_name"] ) ? esc_attr( $_POST["cf_first_name"] ) : '' ) . '" size="20" />';
   echo '</p>';
-  echo '<p>';
   // user last name label and field
+  echo '<p>';
   echo 'Last name<br />';
-  echo '<input type="text" name="cf-lastName" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf-lastName"] ) ? esc_attr( $_POST["cf-lastName"] ) : '' ) . '" size="20" />';
+  echo '<input type="text" name="cf_last_name" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf_last_name"] ) ? esc_attr( $_POST["cf_last_name"] ) : '' ) . '" size="20" />';
+  echo '</p>';
+  // user display name label and field
+  echo '<p>';
+  echo 'Display name<br />';
+  echo '<input type="text" name="cf_display_name" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf_display_name"] ) ? esc_attr( $_POST["cf_display_name"] ) : '' ) . '" size="20" />';
   echo '</p>';
   // user email label and field
   echo '<p>';
   echo 'Email<br />';
-  echo '<input type="text" name="cf-email" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf-email"] ) ? esc_attr( $_POST["cf-email"] ) : '' ) . '" size="30" />';
+  echo '<input type="text" name="cf_user_email" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf_user_email"] ) ? esc_attr( $_POST["cf_user_email"] ) : '' ) . '" size="30" />';
   echo '</p>';
+  // user telephone number label and field
   echo '<p>';
+  echo 'Telephone number<br />';
+  echo '<input type="text" name="cf_telephone" pattern="[0-9]{10}" value="' . ( isset( $_POST["cf_telephone"] ) ? esc_attr( $_POST["cf_telephone"] ) : '' ) . '" size="30" />';
+  echo '</p>';
+  // user login label and field
+  echo '<p>';
+  echo 'user login (id)<br />';
+  echo '<input type="text" name="cf_user_login" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf_user_login"] ) ? esc_attr( $_POST["cf_user_login"] ) : '' ) . '" size="30" />';
+  echo '</p>';
   // dropdown list of metiers
+  echo '<p>';
   echo 'Metier<br />';
-  echo '<select id="cf-metier" name="cf-metier">';
-  foreach($METIERS as $key => $value){
-    echo '<option value=' . $key . '>' . $value . '</option>';
+  echo '<select id="cf_metier" name="cf_metier">';
+  echo '<option disabled selected value> -- select an option -- </option>';
+  foreach($METIERS as $value){
+    echo '<option value=' . $value . '>' . $value . '</option>';
   }
   echo '</select>';
   echo '</p>';
   // submit button
-  echo '<p><input type="submit" name="cf-submitted" value="Search users"/></p>';
+  echo '<p><input type="submit" name="cf_submitted" value="Search users"/></p>';
   echo '</form>';
 }
 
