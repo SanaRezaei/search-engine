@@ -21,7 +21,7 @@ function search_profile_main() {
   // echo "<br>" . do_shortcode( '[youzify_account_avatar]' );
   if ($_POST){
     $data = array(
-      "first_name" => $_POST['cf_name'],
+      "first_name" => $_POST['cf_first_name'],
       "last_name" => $_POST['cf_last_name'],
       "metier" => $_POST['cf_metier'],
       "user_email" => $_POST['cf_user_email'],

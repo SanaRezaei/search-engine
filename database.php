@@ -60,11 +60,12 @@ class Database {
 
     public function getMetierByUserId($id){
         global $METIERS;
+        global $costumFieldsId;
         $metier = "";
-        $sql = "SELECT value FROM wp_bp_xprofile_data where user_id=?"; 
-        $results = $this->query($sql, [$id]);
+        $sql = "SELECT value FROM wp_bp_xprofile_data where user_id=? and field_id=?"; 
+        $results = $this->query($sql, [$id,$costumFieldsId['metier']]);
         foreach($results as $result){
-            if (isset($result['value']) && array_search($result['value'], $METIERS)){
+            if (isset($result['value']) && array_search($result['value'], $METIERS) >= 0){
                 $metier = $result['value'];
                 break;
             }
