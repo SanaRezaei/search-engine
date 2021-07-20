@@ -13,6 +13,7 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
 include "search-profiles.php";
+include "style.css";
 
 add_shortcode('profile_search','search_profile_main');
 function search_profile_main() {
@@ -51,7 +52,8 @@ add_action('admin_menu', 'profile_search_admin_menu');
 
 function html_form_code() {
   global $METIERS;
-
+  echo '<div id="search_form_div" style="border: 5px outset gray; background-color: lightblue; text-align: left;">';
+  echo '<h2>Search Profiles</h2>';
   echo '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';
   // user first name label and field
   echo '<p>';
@@ -71,12 +73,12 @@ function html_form_code() {
   // user email label and field
   echo '<p>';
   echo 'Email<br />';
-  echo '<input type="email" name="cf_user_email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" value="' . ( isset( $_POST["cf_user_email"] ) ? esc_attr( $_POST["cf_user_email"] ) : '' ) . '" size="30" />';
+  echo '<input type="email" name="cf_user_email" placeholder="john.doe@example.com" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" value="' . ( isset( $_POST["cf_user_email"] ) ? esc_attr( $_POST["cf_user_email"] ) : '' ) . '" size="30" />';
   echo '</p>';
   // user telephone number label and field
   echo '<p>';
   echo 'Telephone number<br />';
-  echo '<input type="text" name="cf_telephone" pattern="[0-9]{10}" value="' . ( isset( $_POST["cf_telephone"] ) ? esc_attr( $_POST["cf_telephone"] ) : '' ) . '" size="30" />';
+  echo '<input type="text" name="cf_telephone" placeholder="0102030405" pattern="[0-9]{10}" value="' . ( isset( $_POST["cf_telephone"] ) ? esc_attr( $_POST["cf_telephone"] ) : '' ) . '" size="30" />';
   echo '</p>';
   // user login label and field
   echo '<p>';
@@ -93,10 +95,25 @@ function html_form_code() {
   }
   echo '</select>';
   echo '</p>';
+  // search method
+  echo '<br>';
+  echo '<div>';
+  echo '<p>Return results matching all (non-empty) fields?</p>';
+  echo '<label>';
+  echo '<input type="radio" name="choice-radio" checked/>';
+  echo 'Yes';
+  echo '</label>';
+  echo '<label>';
+  echo '<input type="radio" name="choice-radio" />';
+  echo 'No';
+  echo '</label>';
+  echo '</div>';
+  echo '';
   // submit button
   echo "<br></br>";
   echo '<p><input type="submit" name="cf_submitted" value="Search users"/></p>';
   echo '</form>';
+  echo '</div>';
 }
 
 ?>

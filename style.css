@@ -6,3 +6,8 @@ a {
     color: blue;
     text-align: center;
 }
+
+#search_form_div {
+    border: 5px outset gray;
+    background-color: rgba(198, 205, 207, 0.568);
+}
