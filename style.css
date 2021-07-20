@@ -1,18 +1,8 @@
-/* .card {
-    border: 55px solid gray;
-    width:320px;
-    display: flex;
-} */
-/* .found-user {
+a {
+    color: blue;
+}
+
+#user_id_link {
+    color: blue;
     text-align: center;
 }
-.text-secondary {
-    text-align: center;
-} */
-
-/* .center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 30%;
-  } */

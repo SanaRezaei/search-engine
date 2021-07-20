@@ -94,6 +94,7 @@ function html_form_code() {
   echo '</select>';
   echo '</p>';
   // submit button
+  echo "<br></br>";
   echo '<p><input type="submit" name="cf_submitted" value="Search users"/></p>';
   echo '</form>';
 }

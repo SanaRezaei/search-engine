@@ -11,8 +11,11 @@ function search_profiles($data, $strategy = null) {
     if (empty($data)){
       return;
     }
+
+    if ($strategy == null){
+      $strategy = SearchStrategy::And;
+    }
     global $search_fields;
-    
     global $fieldTypeMap;
     $results = array();
     foreach($search_fields as $field){
@@ -23,7 +26,15 @@ function search_profiles($data, $strategy = null) {
         else {
           $res = searchCostumField($field, $data[$field]);
         }
-        $results= array_unique(array_merge(array_values($results), array_values($res)));
+        if (empty($results)){
+          $results = $res;
+        }
+        else if ($strategy == SearchStrategy::And){
+          $results = array_intersect(array_values($results), array_values($res));
+        }
+        else if ($strategy == SearchStrategy::Or){
+          $results = array_unique(array_merge(array_values($results), array_values($res)));
+        }
       }
     }
     displayUsers($results);
@@ -61,7 +72,8 @@ function searchCostumField($field_name, $field_value){
       array_push($result, $row['user_id']);
     }
   }
-  return array_unique($result);
+  $result = array_unique($result);
+  return $result;
 }
 
 /**
