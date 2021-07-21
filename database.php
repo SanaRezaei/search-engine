@@ -1,12 +1,19 @@
 <?php
-include_once('./utils.php');
+require_once( plugin_dir_path( __FILE__ ) . 'utils.php');
 
 class Database {
-    private  $dbName = 'testDB';
-    private  $dbHost = 'localhost';
-    private  $port = '8889';
-    private  $dbUsername = 'root';
-    private  $dbUserPassword = 'root';
+    // private  $dbName = 'testDB';
+    // private  $dbHost = 'localhost';
+    // private  $port = '8889';
+    // private  $dbUsername = 'root';
+    // private  $dbUserPassword = 'root';
+
+    private  $dbName = 'dbs1031742';
+    private  $dbHost = 'db5001205940.hosting-data.io';
+    private  $port = '3306';
+    private  $dbUsername = 'dbu443908';
+    private  $dbUserPassword = 'rFpSnqamDlcvzzIdrqiA';
+    
     private  $cont = null;
     private  $db;
 
@@ -18,6 +25,7 @@ class Database {
         if ( null == $this->cont ){
             try {
                 $arg = "mysql:host=" . $this->dbHost . ";dbname=" . $this->dbName . ";port=" . $this->port;
+                // $arg = "mysql:host=" . $this->dbHost . ";dbname=" . $this->dbName;
                 $this->cont = new PDO (
                     $arg, $this->dbUsername, $this->dbUserPassword);
 

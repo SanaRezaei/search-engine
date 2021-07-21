@@ -1,19 +1,20 @@
 <?php
 /**
- * Lepopclub Search Engine
+ * Lepppclub Search Engine
  *
  * @package     ProfileSearch
  * @author      Sana REZAEI
  *
  * @wordpress-plugin
- * Plugin Name: Profile Search for lepopclub
- * Description: This plugin prints "Hello World" inside an admin page.
+ * Plugin Name: Profile Search for lepopclub users
+ * Description: This plugin provides a costumized search for user profiles (short code: profile_search)
  * Text Domain: index
  * License:     GPL v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
-include_once "search-profiles.php";
-include_once "utils.php";
+
+require_once( plugin_dir_path( __FILE__ ) . 'search-profiles.php');
+require_once( plugin_dir_path( __FILE__ ) . 'utils.php');
 
 add_shortcode('profile_search','search_profile_main');
 function search_profile_main() {
@@ -122,6 +123,4 @@ function html_form_code() {
   echo '</form>';
   echo '</div>';
 }
-
 ?>
-

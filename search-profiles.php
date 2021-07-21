@@ -1,7 +1,7 @@
 <?php 
-require( plugin_dir_path( __FILE__ ) . 'database.php');
-require( plugin_dir_path( __FILE__ ) . 'display-result.php');
-require( plugin_dir_path( __FILE__ ) . 'utils.php');
+require_once( plugin_dir_path( __FILE__ ) . 'database.php');
+require_once( plugin_dir_path( __FILE__ ) . 'display-result.php');
+require_once( plugin_dir_path( __FILE__ ) . 'utils.php');
 
 /**
  * search profiles based on a given array of fields name and value
