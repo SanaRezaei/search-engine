@@ -1,8 +1,11 @@
 <?php
 function displayUsers($ids){
+    echo "<br>";
+    echo '<div class="card" style="border: 5px outset gray; background-color: lightgray; text-align: center;">';
     foreach($ids as $id) {
         displayUser($id); 
     }
+    echo '</div>';
 }
 
 function displayUser($id) {
