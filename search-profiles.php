@@ -7,14 +7,12 @@ require( plugin_dir_path( __FILE__ ) . 'utils.php');
  * search profiles based on a given array of fields name and value
  * @param array $data input associative array contating fieldName->fieldValue
  */
-function search_profiles($data, $strategy = null) { 
+function search_profiles($data) { 
     if (empty($data)){
       return;
     }
+    $strategy = $data['search_strategy'];
 
-    if ($strategy == null){
-      $strategy = SearchStrategy::And;
-    }
     global $search_fields;
     global $fieldTypeMap;
     $results = array();

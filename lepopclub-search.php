@@ -12,15 +12,21 @@
  * License:     GPL v2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
-include "search-profiles.php";
-include "style.css";
+include_once "search-profiles.php";
+include_once "utils.php";
 
 add_shortcode('profile_search','search_profile_main');
 function search_profile_main() {
   html_form_code();
   global $METIERS;
+  
+  
   // echo "<br>" . do_shortcode( '[youzify_account_avatar]' );
   if ($_POST){
+    $searchType = SearchStrategy::And;
+    if ($_POST['radio-search-type'] == 'No'){
+      $searchType = SearchStrategy::Or;
+    }
     $data = array(
       "first_name" => $_POST['cf_first_name'],
       "last_name" => $_POST['cf_last_name'],
@@ -29,6 +35,7 @@ function search_profile_main() {
       "user_login" => $_POST['cf_user_login'],
       "display_name" => $_POST['cf_display_name'],
       "telephone" => $_POST['cf_telephone'],
+      "search_strategy" => $searchType,
     );
     try{
         search_profiles($data);
@@ -100,18 +107,18 @@ function html_form_code() {
   echo '<div>';
   echo '<p>Return results matching all (non-empty) fields?</p>';
   echo '<label>';
-  echo '<input type="radio" name="choice-radio" checked/>';
-  echo 'Yes';
+  echo '<input type="radio" name="radio-search-type" value="Yes" checked/>';
+  echo 'Yes ';
   echo '</label>';
   echo '<label>';
-  echo '<input type="radio" name="choice-radio" />';
+  echo '<input type="radio" name="radio-search-type" value="No" />';
   echo 'No';
   echo '</label>';
   echo '</div>';
   echo '';
   // submit button
   echo "<br></br>";
-  echo '<p><input type="submit" name="cf_submitted" value="Search users"/></p>';
+  echo '<p><input type="submit" name="cf_submitted" value="Search users" style="text-align: center;"/></p>';
   echo '</form>';
   echo '</div>';
 }
