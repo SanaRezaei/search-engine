@@ -1,9 +1,15 @@
 <?php
+echo "<style>";
+include_once('style.css');
+echo "<\style>";
+
 function displayUsers($ids){
     echo "<br>";
-    echo '<div>';
+    echo '<div class="results">';
     foreach($ids as $id) {
+        echo '<div class="result_item">';
         displayUser($id); 
+        echo '</div>';
     }
     echo '</div>';
 }

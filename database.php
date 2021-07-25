@@ -80,6 +80,11 @@ class Database {
         }
         return $metier;
     }
+
+    public function getListOfTables() {
+        $sql = "SELECT table_name FROM user_tables"; 
+        return $this->query($sql,[]);
+    }
 }
 
 ?>

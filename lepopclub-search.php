@@ -18,14 +18,12 @@ require_once( plugin_dir_path( __FILE__ ) . 'utils.php');
 
 add_shortcode('profile_search','search_profile_main');
 function search_profile_main() {
-  html_form_code();
-  global $METIERS;
-  
+  html_form_code();  
   
   // echo "<br>" . do_shortcode( '[youzify_account_avatar]' );
   if ($_POST){
     $searchType = SearchStrategy::And;
-    if ($_POST['radio-search-type'] == 'No'){
+    if ($_POST['radio-search-type'] == 'Non'){
       $searchType = SearchStrategy::Or;
     }
     $data = array(
@@ -60,66 +58,81 @@ add_action('admin_menu', 'profile_search_admin_menu');
 
 function html_form_code() {
   global $METIERS;
-  echo '<div id="search_form_div" style="border: 5px outset gray; background-color: lightblue; text-align: left;">';
-  echo '<h2>Search Profiles</h2>';
+  echo '<div id="search_form_div">';
+  echo '<h2>Rechercher des profils</h2>';
   echo '<form action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" method="post">';
   // user first name label and field
+  echo '<div class="search_form_item">';
   echo '<p>';
-  echo 'First name<br />';
+  echo 'Prénom<br />';
   echo '<input type="text" name="cf_first_name" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf_first_name"] ) ? esc_attr( $_POST["cf_first_name"] ) : '' ) . '" size="20" />';
   echo '</p>';
   // user last name label and field
+  echo '<div class="search_form_item">';
   echo '<p>';
-  echo 'Last name<br />';
+  echo 'Nom<br />';
   echo '<input type="text" name="cf_last_name" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf_last_name"] ) ? esc_attr( $_POST["cf_last_name"] ) : '' ) . '" size="20" />';
   echo '</p>';
+  echo '</div>';
   // user display name label and field
+  echo '<div class="search_form_item">';
   echo '<p>';
-  echo 'Display name<br />';
+  echo 'Nom affiché<br />';
   echo '<input type="text" name="cf_display_name" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf_display_name"] ) ? esc_attr( $_POST["cf_display_name"] ) : '' ) . '" size="20" />';
   echo '</p>';
+  echo '</div>';
   // user email label and field
+  echo '<div class="search_form_item">';
   echo '<p>';
   echo 'Email<br />';
   echo '<input type="email" name="cf_user_email" placeholder="john.doe@example.com" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" value="' . ( isset( $_POST["cf_user_email"] ) ? esc_attr( $_POST["cf_user_email"] ) : '' ) . '" size="30" />';
   echo '</p>';
+  echo '</div>';
   // user telephone number label and field
+  echo '<div class="search_form_item">';
   echo '<p>';
-  echo 'Telephone number<br />';
+  echo 'Téléphone<br />';
   echo '<input type="text" name="cf_telephone" placeholder="0102030405" pattern="[0-9]{10}" value="' . ( isset( $_POST["cf_telephone"] ) ? esc_attr( $_POST["cf_telephone"] ) : '' ) . '" size="30" />';
   echo '</p>';
+  echo '</div>';
   // user login label and field
+  echo '<div class="search_form_item">';
   echo '<p>';
-  echo 'user login (id)<br />';
+  echo 'identifiant d\'utilisateur<br />';
   echo '<input type="text" name="cf_user_login" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf_user_login"] ) ? esc_attr( $_POST["cf_user_login"] ) : '' ) . '" size="30" />';
   echo '</p>';
+  echo '</div>';
   // dropdown list of metiers
+  echo '<div class="search_form_item">';
   echo '<p>';
   echo 'Metier<br />';
   echo '<select id="cf_metier" name="cf_metier">';
-  echo '<option disabled selected value> -- select an option -- </option>';
+  echo '<option disabled selected value> -- Sélectionner une option -- </option>';
   foreach($METIERS as $value){
     echo '<option value=' . $value . '>' . $value . '</option>';
   }
   echo '</select>';
   echo '</p>';
+  echo '</div>';
   // search method
+  echo '<div class="search_form_item">';
   echo '<br>';
   echo '<div>';
-  echo '<p>Return results matching all (non-empty) fields?</p>';
+  echo '<p>Retourner les résultats correspondant à tous les champs (non vides)?</p>';
   echo '<label>';
-  echo '<input type="radio" name="radio-search-type" value="Yes" checked/>';
-  echo 'Yes ';
+  echo '<input type="radio" name="radio-search-type" value="Oui" checked/>';
+  echo 'Oui ';
   echo '</label>';
   echo '<label>';
-  echo '<input type="radio" name="radio-search-type" value="No" />';
-  echo 'No';
+  echo '<input type="radio" name="radio-search-type" value="Non" />';
+  echo 'Non';
   echo '</label>';
   echo '</div>';
   echo '';
+  echo '</div>';
   // submit button
   echo "<br></br>";
-  echo '<p><input type="submit" name="cf_submitted" value="Search users" style="text-align: center;"/></p>';
+  echo '<p><input type="submit" name="cf_submitted" value="Rechercher des utilisateurs" style="text-align: center;"/></p>';
   echo '</form>';
   echo '</div>';
 }

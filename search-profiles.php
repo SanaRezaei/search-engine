@@ -2,6 +2,9 @@
 require_once( plugin_dir_path( __FILE__ ) . 'database.php');
 require_once( plugin_dir_path( __FILE__ ) . 'display-result.php');
 require_once( plugin_dir_path( __FILE__ ) . 'utils.php');
+echo "<style>";
+include_once('style.css');
+echo "<\style>";
 
 /**
  * search profiles based on a given array of fields name and value
@@ -89,6 +92,40 @@ function isMatch($field_name, $value1, $value2){
   else {
     return ($value1 == $value2);
   }
+}
+
+function printBuddyPressXProfileData() {
+  $db = new Database();
+  $sql = "SELECT field_id,user_id,value FROM wp_bp_xprofile_data"; 
+  $results = $db->query($sql, []);
+  echo "<br>printing wp_bp_xprofile_data";
+  foreach($results as $result){
+      echo "<br>field_id: " . $result['field_id'] . ", user_id: " . $result['user_id'] . ", value: " . $result['value'];
+  }
+  echo "<br>=================";
+}
+
+function printBuddyPressXProfileFields() {
+  $db = new Database();
+  $sql = "SELECT type,name,description FROM wp_bp_xprofile_fields"; 
+  $results = $db->query($sql, []);
+  echo "<br>printing wp_bp_xprofile_fields";
+  foreach($results as $result){
+      echo "<br>name: " . $result['name'] . ", description: " . $result['description'] . ", type: " . $result['type'];
+  }
+  echo "<br>=================";
+}
+
+function printTableNames() {
+  $db = new Database();
+  $sql = "SELECT table_name FROM dba_tables"; 
+  $results = $db->query($sql, []);
+  echo "<br>printing table names";
+  echo "<br> results[0]" . $results[0];
+  echo "<br> results[1]" . $results[1];
+  echo "<br> results[table_name]" . $results['table_name'];
+  printArray($results);
+  echo "<br>=================";
 }
 
 ?>

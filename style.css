@@ -1,13 +1,26 @@
-a {
-    color: blue;
-}
+/* .search_form_item {
+    border: solid 1px rgb(202, 206, 200);
+} */
 
 #user_id_link {
-    color: blue;
-    text-align: center;
+  color: blue;
+  text-align: center;
 }
 
-#search_form_div {
-    border: 5px outset gray;
-    background-color: rgba(198, 205, 207, 0.568);
+.search_form_div {
+  justify-content: space-around;
+  /* flex-wrap: wrap; */
+  display: flex;
+  border: 5px outset gray;
+  background-color: rgba(198, 205, 207, 0.568);
+}
+
+.results {
+  /* border: solid 1px rgb(0, 9, 128); */
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.result_item {
+  border: solid 1px rgb(202, 206, 200);
 }
