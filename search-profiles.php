@@ -62,12 +62,11 @@ function searchStandardField($field_name, $field_value){
  * @return array array of users matching the given field value (array of WP_User object)
  */
 function searchCostumField($field_name, $field_value){
-  $db = new Database();
-  $sql = "SELECT user_id,value FROM wp_bp_xprofile_data where field_id=?"; 
+  global $wpdb;
   global $costumFieldsId;
-  $rows = $db->query($sql, [$costumFieldsId[$field_name]]);
+  $sql = "SELECT user_id,value FROM " . $wpdb->prefix . "bp_xprofile_data where field_id='" . $costumFieldsId[$field_name] . "'"; 
+  $rows = $wpdb->get_results($sql, ARRAY_A);
   $result = array();
-
   foreach($rows as $row){
     if (isMatch($field_name, $field_value, $row['value'])){
       array_push($result, $row['user_id']);
@@ -95,37 +94,13 @@ function isMatch($field_name, $value1, $value2){
 }
 
 function printBuddyPressXProfileData() {
-  $db = new Database();
-  $sql = "SELECT field_id,user_id,value FROM wp_bp_xprofile_data"; 
-  $results = $db->query($sql, []);
-  echo "<br>printing wp_bp_xprofile_data";
-  foreach($results as $result){
-      echo "<br>field_id: " . $result['field_id'] . ", user_id: " . $result['user_id'] . ", value: " . $result['value'];
+  global $wpdb;
+  $table_name = $wpdb->prefix . 'bp_xprofile_data';
+  $sql = "SELECT field_id,user_id,value FROM $table_name";
+  $result = $wpdb->get_results($sql, ARRAY_A);
+  foreach($result as $row){
+    printArray($row);
   }
-  echo "<br>=================";
-}
-
-function printBuddyPressXProfileFields() {
-  $db = new Database();
-  $sql = "SELECT type,name,description FROM wp_bp_xprofile_fields"; 
-  $results = $db->query($sql, []);
-  echo "<br>printing wp_bp_xprofile_fields";
-  foreach($results as $result){
-      echo "<br>name: " . $result['name'] . ", description: " . $result['description'] . ", type: " . $result['type'];
-  }
-  echo "<br>=================";
-}
-
-function printTableNames() {
-  $db = new Database();
-  $sql = "SELECT table_name FROM dba_tables"; 
-  $results = $db->query($sql, []);
-  echo "<br>printing table names";
-  echo "<br> results[0]" . $results[0];
-  echo "<br> results[1]" . $results[1];
-  echo "<br> results[table_name]" . $results['table_name'];
-  printArray($results);
-  echo "<br>=================";
 }
 
 ?>

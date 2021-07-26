@@ -119,4 +119,9 @@ $costumFieldsId = array(
   "telephone" => 5,
 );
 
+function getTablePrefix() {
+  global $wpdb;
+  return $wpdb->prefix;
+}
+
 ?>

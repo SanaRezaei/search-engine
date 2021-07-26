@@ -2,17 +2,17 @@
 require_once( plugin_dir_path( __FILE__ ) . 'utils.php');
 
 class Database {
-    // private  $dbName = 'testDB';
-    // private  $dbHost = 'localhost';
-    // private  $port = '8889';
-    // private  $dbUsername = 'root';
-    // private  $dbUserPassword = 'root';
+    private  $dbName = 'testDB';
+    private  $dbHost = 'localhost';
+    private  $port = '8889';
+    private  $dbUsername = 'root';
+    private  $dbUserPassword = 'root';
 
-    private  $dbName = 'dbs1031742';
-    private  $dbHost = 'db5001205940.hosting-data.io';
-    private  $port = '3306';
-    private  $dbUsername = 'dbu443908';
-    private  $dbUserPassword = 'rFpSnqamDlcvzzIdrqiA';
+    // private  $dbName = 'dbs1031742';
+    // private  $dbHost = 'db5001205940.hosting-data.io';
+    // private  $port = '8889';
+    // private  $dbUsername = 'dbu443908';
+    // private  $dbUserPassword = 'rFpSnqamDlcvzzIdrqiA';
     
     private  $cont = null;
     private  $db;
@@ -42,14 +42,14 @@ class Database {
     public function getCurrentUser() {
         $id = get_current_user_id();
         $sql = "SELECT * FROM wp_users where ID=?"; 
-        return $this->query($sql, [$id]);
+        return $this->query($sql, [$id])[0];
     }
 
     public function getUserById($id) {
         $sql = "SELECT * FROM wp_users where ID=?"; 
         $res = $this->query($sql, [$id]);
         if (isset($res) && count($res)>0){
-            return $res;
+            return $res[0];
         }
         else {
             return null;

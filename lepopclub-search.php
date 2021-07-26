@@ -120,11 +120,11 @@ function html_form_code() {
   echo '<div>';
   echo '<p>Retourner les résultats correspondant à tous les champs (non vides)?</p>';
   echo '<label>';
-  echo '<input type="radio" name="radio-search-type" value="Oui" checked/>';
+  echo '<input type="radio" name="radio-search-type" value="Oui"/>';
   echo 'Oui ';
   echo '</label>';
   echo '<label>';
-  echo '<input type="radio" name="radio-search-type" value="Non" />';
+  echo '<input type="radio" name="radio-search-type" value="Non" checked />';
   echo 'Non';
   echo '</label>';
   echo '</div>';

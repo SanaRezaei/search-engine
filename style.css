@@ -22,5 +22,6 @@
   flex-wrap: wrap;
 }
 .result_item {
-  border: solid 1px rgb(202, 206, 200);
+  /* border: solid 3px rgb(105, 95, 187); */
+  justify-content: space-around;
 }
