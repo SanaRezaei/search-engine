@@ -3,15 +3,16 @@ echo "<style>";
 include_once('style.css');
 echo "<\style>";
 
-function displayUsers($ids){
+function displayUsers($users){
+    // printArray($users);
     echo "<br>";
     echo '<div class="results">';
-    if (empty($ids)){
+    if (empty($users)){
         echo "<br><h4 style='color: red;'> Aucun résultat trouvé </h4>";
     }
     else {
         // echo "<br><h4 style='color: green;'>" . sizeof($ids) . " profils trouvés</h4></br>";
-        foreach($ids as $id) {
+        foreach($users as $id => $score) {
             echo '<div class="result_item">';
             displayUser($id); 
             echo '</div>';
