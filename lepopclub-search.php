@@ -118,7 +118,11 @@ function html_form_code() {
   echo '<div class="search_form_item">';
   echo '<br>';
   echo '<div>';
-  echo '<p>Retourner les résultats correspondant à tous les champs (non vides)?</p>';
+  echo '<p>Tous les champs doivent correspondre:</p>';
+  echo '<div class="help-tip">';
+  echo '<p>Si vous sélectionnez Oui, l\'opérateur AND sera utilisé pour faire correspondre tous les champs, sinon tous les résultats avec au moins une correspondance de champ seront renvoyés.</p>';
+  echo '</div>';
+  echo '</div>';
   echo '<label>';
   echo '<input type="radio" name="radio-search-type" value="Oui"/>';
   echo 'Oui ';
