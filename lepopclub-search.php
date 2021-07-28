@@ -13,7 +13,7 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-require_once( plugin_dir_path( __FILE__ ) . 'search-profiles.php');
+require_once( plugin_dir_path( __FILE__ ) . 'profile-search.php');
 require_once( plugin_dir_path( __FILE__ ) . 'utils.php');
 
 add_shortcode('profile_search','search_profile_main');
@@ -37,7 +37,8 @@ function search_profile_main() {
       "search_strategy" => $searchType,
     );
     try{
-        search_profiles($data);
+        $search = new ProfileSearch($data);
+        $search->execute();
     }
     catch(Exception $e) {
         echo 'Caught exception: ',  $e->getMessage(), "\n";
