@@ -22,9 +22,9 @@ function search_profile_main() {
   
   // echo "<br>" . do_shortcode( '[youzify_account_avatar]' );
   if ($_POST){
-    $searchType = SearchStrategy::And;
-    if ($_POST['radio-search-type'] == 'Non'){
-      $searchType = SearchStrategy::Or;
+    $searchType = SearchStrategy::Or;
+    if ($_POST['radio-search-type'] == 'Oui'){
+      $searchType = SearchStrategy::And;
     }
     $data = array(
       "first_name" => $_POST['cf_first_name'],
@@ -115,25 +115,25 @@ function html_form_code() {
   echo '</p>';
   echo '</div>';
   // search method
-  echo '<div class="search_form_item">';
-  echo '<br>';
-  echo '<div>';
-  echo '<p>Tous les champs doivent correspondre:</p>';
-  echo '<div class="help-tip">';
-  echo '<p>Si vous sélectionnez Oui, l\'opérateur AND sera utilisé pour faire correspondre tous les champs, sinon tous les résultats avec au moins une correspondance de champ seront renvoyés.</p>';
-  echo '</div>';
-  echo '</div>';
-  echo '<label>';
-  echo '<input type="radio" name="radio-search-type" value="Oui"/>';
-  echo 'Oui ';
-  echo '</label>';
-  echo '<label>';
-  echo '<input type="radio" name="radio-search-type" value="Non" checked />';
-  echo 'Non';
-  echo '</label>';
-  echo '</div>';
-  echo '';
-  echo '</div>';
+  // echo '<div class="search_form_item">';
+  // echo '<br>';
+  // echo '<div>';
+  // echo '<p>Tous les champs doivent correspondre:</p>';
+  // echo '<div class="help-tip">';
+  // echo '<p>Si vous sélectionnez Oui, l\'opérateur AND sera utilisé pour faire correspondre tous les champs, sinon tous les résultats avec au moins une correspondance de champ seront renvoyés.</p>';
+  // echo '</div>';
+  // echo '</div>';
+  // echo '<label>';
+  // echo '<input type="radio" name="radio-search-type" value="Oui"/>';
+  // echo 'Oui ';
+  // echo '</label>';
+  // echo '<label>';
+  // echo '<input type="radio" name="radio-search-type" value="Non" checked />';
+  // echo 'Non';
+  // echo '</label>';
+  // echo '</div>';
+  // echo '';
+  // echo '</div>';
   // submit button
   echo "<br></br>";
   echo '<p><input type="submit" name="cf_submitted" value="Rechercher des utilisateurs" style="text-align: center;"/></p>';

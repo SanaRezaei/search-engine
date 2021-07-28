@@ -11,7 +11,7 @@ echo "<\style>";
  * @param array $data input associative array contating fieldName->fieldValue
  */
 function search_profiles($data) { 
-    if (empty($data)){
+    if (!atLeastOneFieldSelected($data)){
       return;
     }
     $strategy = $data['search_strategy'];
@@ -21,32 +21,52 @@ function search_profiles($data) {
     $results = array();
     foreach($search_fields as $field){
       if (!empty($data[$field])){
+        $fieldResult = array();
         if ($fieldTypeMap[$field] == FieldTypes::STANDARD){
-          $res = searchStandardField($field, $data[$field]);
+          $fieldResult = searchStandardField($field, $data[$field]);
         }
         else {
-          $res = searchCostumField($field, $data[$field]);
+          $fieldResult = searchCostumField($field, $data[$field]);
         }
-        if (empty($results)){
-          $results = $res;
+        if (empty($results && !empty($fieldResult))){
+            $results = $fieldResult;
         }
         else if ($strategy == SearchStrategy::And){
-          $results = array_intersect($results, $res);
+          foreach ($fieldResult as $id => $score){
+            if (array_key_exists($id, $results)) {
+              $results[$id] = $results[$id] + $fieldResult[$id];
+            }
+          }
         }
         else if ($strategy == SearchStrategy::Or){
-          $results = array_unique($results + $res);
+          foreach ($fieldResult as $id => $score){
+            if (array_key_exists($id, $results)) {
+              $results[$id] = $results[$id] + $fieldResult[$id];
+            }
+            else {
+              $results[$id] = $fieldResult[$id];
+            }
+          }
         }
       }
     }
-    $result = asort($result);
+    arsort($results);
     displayUsers($results);
+}
+function atLeastOneFieldSelected(array $data): bool {
+  global $search_fields;
+  foreach($search_fields as $field){
+    if (!empty($data[$field])) 
+      return true;
+  }
+  return false;
 }
 
 /**
  * search function taking standard field (available in wp_users table)
  * @return array array of users matching the given field value (array of WP_User object)
  */
-function searchStandardField($field_name, $field_value){
+function searchStandardField(string $field_name, $field_value){
   $users = get_users();
   // array of matched user IDs
   $result = array();
