@@ -37,8 +37,7 @@ function search_profile_main() {
       "search_strategy" => $searchType,
     );
     try{
-        $search = new ProfileSearch($data);
-        $search->execute();
+        (new ProfileSearch($data))->execute();
     }
     catch(Exception $e) {
         echo 'Caught exception: ',  $e->getMessage(), "\n";
